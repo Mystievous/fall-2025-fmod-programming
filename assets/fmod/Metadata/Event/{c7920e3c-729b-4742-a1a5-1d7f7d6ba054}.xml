@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<objects serializationModel="Studio.02.02.00">
+<objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{c7920e3c-729b-4742-a1a5-1d7f7d6ba054}">
 		<property name="name">
 			<value>Entity SFX</value>

@@ -1,9 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxhcoso7hw8my"]
+[gd_scene load_steps=10 format=3 uid="uid://cxhcoso7hw8my"]
 
 [ext_resource type="PackedScene" uid="uid://b8p1yvxf8330p" path="res://objects/player.tscn" id="1_y8ke0"]
 [ext_resource type="AudioStream" uid="uid://deowcflrhco43" path="res://assets/fmod/Assets/laser gun 14.wav" id="2_ovvea"]
+[ext_resource type="Script" uid="uid://bfvp8yxqp7fp5" path="res://examples/builtin/house.gd" id="3_svvyt"]
 [ext_resource type="Script" uid="uid://b3kg3p7fhroc0" path="res://examples/builtin/ui_controls.gd" id="4_5t4ds"]
-[ext_resource type="AudioStream" uid="uid://cdm74l8h7qv4o" path="res://assets/SpiritScuffle_v1.3.wav" id="4_npm5d"]
+[ext_resource type="AudioStream" uid="uid://ddqsbxdm1utav" path="res://assets/fmod/Assets/ArtemisFineSpiritScuffle-Main.wav" id="4_svvyt"]
+[ext_resource type="AudioStream" uid="uid://cva4i5lrktghs" path="res://assets/fmod/Assets/ArtemisFineSpiritScuffle-Bass.wav" id="5_3gv67"]
+[ext_resource type="AudioStream" uid="uid://8sjrqpc01av1" path="res://assets/fmod/Assets/ArtemisFineSpiritScuffle-Drums.wav" id="6_y66kc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_npm5d"]
+size = Vector2(278, 195)
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_b7sy6"]
+stream_count = 3
+stream_0/stream = ExtResource("4_svvyt")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("5_3gv67")
+stream_1/volume = 0.0
+stream_2/stream = ExtResource("6_y66kc")
+stream_2/volume = 0.0
 
 [node name="ExampleScene" type="Node2D"]
 
@@ -106,8 +121,32 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 773.0
+offset_top = 291.0
+offset_right = 1102.0
+offset_bottom = 346.0
+text = "This is your house...
+If you stand inside, the music changes..."
+
+[node name="House" type="Area2D" parent="." node_paths=PackedStringArray("audioStreamPlayer")]
+position = Vector2(-3, 0)
+script = ExtResource("3_svvyt")
+audioStreamPlayer = NodePath("../Music_AudioStreamPlayer")
+
+[node name="Polygon2D" type="Polygon2D" parent="House"]
+position = Vector2(937.00006, 479)
+scale = Vector2(42.579098, 32.23273)
+color = Color(0.6901961, 0.33333334, 0.93333334, 0.39607844)
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="House"]
+position = Vector2(937, 479.5)
+shape = SubResource("RectangleShape2D_npm5d")
+
 [node name="Music_AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_npm5d")
+unique_name_in_owner = true
+stream = SubResource("AudioStreamSynchronized_b7sy6")
 volume_db = -7.042
 autoplay = true
 
@@ -142,3 +181,6 @@ text = "Play Sound At #2"
 [node name="Play3" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 text = "Play Sound At #3"
+
+[connection signal="body_entered" from="House" to="House" method="on_body_enter"]
+[connection signal="body_exited" from="House" to="House" method="on_body_exit"]
