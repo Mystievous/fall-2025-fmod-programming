@@ -1,0 +1,144 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxhcoso7hw8my"]
+
+[ext_resource type="PackedScene" uid="uid://b8p1yvxf8330p" path="res://objects/player.tscn" id="1_y8ke0"]
+[ext_resource type="AudioStream" uid="uid://deowcflrhco43" path="res://assets/fmod/Assets/laser gun 14.wav" id="2_ovvea"]
+[ext_resource type="Script" uid="uid://b3kg3p7fhroc0" path="res://examples/builtin/ui_controls.gd" id="4_5t4ds"]
+[ext_resource type="AudioStream" uid="uid://cdm74l8h7qv4o" path="res://assets/SpiritScuffle_v1.3.wav" id="4_npm5d"]
+
+[node name="ExampleScene" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_y8ke0")]
+position = Vector2(530, 294)
+
+[node name="AudioListener2D" type="AudioListener2D" parent="Player"]
+current = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="AudioStreamPlayer2D_#1" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(188, 241)
+stream = ExtResource("2_ovvea")
+panning_strength = 2.0
+
+[node name="ColorRect" type="ColorRect" parent="AudioStreamPlayer2D_#1"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="AudioStreamPlayer2D_#1"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "#1"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer2D_#2" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(856, 103)
+stream = ExtResource("2_ovvea")
+panning_strength = 2.0
+
+[node name="ColorRect" type="ColorRect" parent="AudioStreamPlayer2D_#2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="AudioStreamPlayer2D_#2"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "#2"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer2D_#3" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(394, 481)
+stream = ExtResource("2_ovvea")
+panning_strength = 2.0
+
+[node name="ColorRect" type="ColorRect" parent="AudioStreamPlayer2D_#3"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="AudioStreamPlayer2D_#3"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "#3"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Music_AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_npm5d")
+volume_db = -7.042
+autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("music_toggle", "music_emitter", "play_1", "emitter_1", "play_2", "emitter_2", "play_3", "emitter_3")]
+script = ExtResource("4_5t4ds")
+music_toggle = NodePath("VBoxContainer/MusicToggle")
+music_emitter = NodePath("../Music_AudioStreamPlayer")
+play_1 = NodePath("VBoxContainer/Play1")
+emitter_1 = NodePath("../AudioStreamPlayer2D_#1")
+play_2 = NodePath("VBoxContainer/Play2")
+emitter_2 = NodePath("../AudioStreamPlayer2D_#2")
+play_3 = NodePath("VBoxContainer/Play3")
+emitter_3 = NodePath("../AudioStreamPlayer2D_#3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MusicToggle" type="CheckButton" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Music Enabled"
+
+[node name="Play1" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Play Sound At #1"
+
+[node name="Play2" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Play Sound At #2"
+
+[node name="Play3" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Play Sound At #3"

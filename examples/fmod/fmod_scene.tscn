@@ -1,0 +1,176 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddq1o2avwmgxp"]
+
+[ext_resource type="PackedScene" uid="uid://b8p1yvxf8330p" path="res://objects/player.tscn" id="1_hof7n"]
+[ext_resource type="Script" uid="uid://c0xe2224cfhsf" path="res://examples/fmod/house.gd" id="2_d1whw"]
+[ext_resource type="Script" uid="uid://cn2urqc263n3m" path="res://examples/fmod/ui_controls.gd" id="3_83i0k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uabj3"]
+size = Vector2(278, 195)
+
+[node name="ExampleScene" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_hof7n")]
+position = Vector2(530, 294)
+
+[node name="FmodListener2D" type="FmodListener2D" parent="Player"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="FmodEventEmitter2D_#1" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Entity SFX"
+event_guid = "{c7920e3c-729b-4742-a1a5-1d7f7d6ba054}"
+position = Vector2(188, 241)
+
+[node name="ColorRect" type="ColorRect" parent="FmodEventEmitter2D_#1"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="FmodEventEmitter2D_#1"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "#1"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="FmodEventEmitter2D_#2" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Entity SFX"
+event_guid = "{c7920e3c-729b-4742-a1a5-1d7f7d6ba054}"
+position = Vector2(856, 103)
+
+[node name="ColorRect" type="ColorRect" parent="FmodEventEmitter2D_#2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="FmodEventEmitter2D_#2"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "#2"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="FmodEventEmitter2D_#3" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Entity SFX"
+event_guid = "{c7920e3c-729b-4742-a1a5-1d7f7d6ba054}"
+position = Vector2(394, 481)
+
+[node name="ColorRect" type="ColorRect" parent="FmodEventEmitter2D_#3"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="FmodEventEmitter2D_#3"]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "#3"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="House" type="Area2D" parent="." node_paths=PackedStringArray("fmodEventEmitter")]
+script = ExtResource("2_d1whw")
+fmodEventEmitter = NodePath("../Music_FmodEventEmitter2D")
+
+[node name="Polygon2D" type="Polygon2D" parent="House"]
+position = Vector2(937.00006, 479)
+scale = Vector2(42.579098, 32.23273)
+color = Color(0.6901961, 0.33333334, 0.93333334, 0.39607844)
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="House"]
+position = Vector2(937, 479.5)
+shape = SubResource("RectangleShape2D_uabj3")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 773.0
+offset_top = 291.0
+offset_right = 1102.0
+offset_bottom = 346.0
+text = "This is your house...
+If you stand inside, the music changes..."
+
+[node name="FmodBankLoader" type="FmodBankLoader" parent="."]
+bank_paths = ["res://assets/fmod/Build/Desktop/Master.strings.bank", "res://assets/fmod/Build/Desktop/Master.bank"]
+
+[node name="Music_FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Mysti's Music"
+event_guid = "{85d9169d-1949-46b5-9ded-907d427f6d90}"
+autoplay = true
+fmod_parameters/Intensity/id = -7227092286567547507
+fmod_parameters/Intensity = 1.0
+fmod_parameters/Intensity/variant_type = 3
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("music_toggle", "music_emitter", "play_1", "emitter_1", "play_2", "emitter_2", "play_3", "emitter_3")]
+script = ExtResource("3_83i0k")
+music_toggle = NodePath("VBoxContainer/MusicToggle")
+music_emitter = NodePath("../Music_FmodEventEmitter2D")
+play_1 = NodePath("VBoxContainer/Play1")
+emitter_1 = NodePath("../FmodEventEmitter2D_#1")
+play_2 = NodePath("VBoxContainer/Play2")
+emitter_2 = NodePath("../FmodEventEmitter2D_#2")
+play_3 = NodePath("VBoxContainer/Play3")
+emitter_3 = NodePath("../FmodEventEmitter2D_#3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MusicToggle" type="CheckButton" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Music Enabled"
+
+[node name="Play1" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Play Sound At #1"
+
+[node name="Play2" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Play Sound At #2"
+
+[node name="Play3" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Play Sound At #3"
+
+[connection signal="body_entered" from="House" to="House" method="on_body_enter"]
+[connection signal="body_exited" from="House" to="House" method="on_body_exit"]
